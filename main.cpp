@@ -33,11 +33,34 @@ int main() {
 
         if (chance < 55) {
             // 55% probability: front car pays and leaves
-           
+           Car paidCar = lane.front();
+            lane.pop_front();
+
+            cout << "Car paid: ";
+            printSingleCar(paidCar);
+            cout << endl;
         } else {
             // 45% probability: another car joins
-           
+           Car newCar;
+            lane.push_back(newCar);
+
+            cout << "Joined lane: ";
+            printSingleCar(newCar);
+            cout << endl;
         }
+
+    cout << "Queue:\n";
+        if (lane.empty()) {
+            cout << "    Empty\n";
+        } else {
+            printQueue(lane);
+        }
+        cout << endl;
+    }
+
+    cout << "This simulation ran " << timePeriod
+         << " cycles until the queue was empty.\n";
+
 
     return 0;
 }
