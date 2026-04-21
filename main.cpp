@@ -2,19 +2,38 @@
 #include <deque>
 #include <cstdlib>
 #include <ctime>
-#include "car.h"
+#include "Car.h"
 
 using namespace std;
 const int INITIAL_QUEUE_SIZE = 2;
 
+
+void printSingleCar(Car car) {
+    cout << car.getYear()
+         << car.getMake() 
+         << car.getTransponder();
+}
+
+void printQueue(deque<Car> lane) {
+    if (lane.empty()) {
+        cout << "Empty";
+        return;
+    }
+
+    for (Car car : lane) {
+        car.print();
+    }
+}
+
+
 int main() {
     srand(time(0));
 
-    deque<car> lane;
+    deque<Car> lane;
 
     // Milestone 1: create deque and populate with two Car objects
     for (int i = 0; i < INITIAL_QUEUE_SIZE; i++) {
-        lane.push_back(car());
+        lane.push_back(Car());
     }
 
     cout << "Initial queue:\n";
