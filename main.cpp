@@ -117,9 +117,9 @@ int main()
             }
             else
             {
-                int chance = rand() % 2;
+                int chance = rand() % 100;
 
-                if (chance == 0)
+                if (chance < PAY_PROB)
                 {
                     Car paidCar = plaza[i].front();
                     plaza[i].pop_front();
@@ -127,12 +127,29 @@ int main()
                     printSingleCar(paidCar);
                     cout << endl;
                 }
-                else
+                else if (chance < PAY_PROB + JOIN_PROB)
                 {
                     Car newCar;
                     plaza[i].push_back(newCar);
                     cout << "Lane: " << i + 1 << " Joined: ";
                     printSingleCar(newCar);
+                    cout << endl;
+                }
+                else
+                {
+                    Car switchedCar = plaza[i].back();
+                    plaza[i].pop_back();
+
+                    int targetLane;
+                    do
+                    {
+                        targetLane = rand() % NUM_LANES;
+                    } while (targetLane == i);
+
+                    plaza[targetLane].push_back(switchedCar);
+
+                    cout << "Lane: " << i + 1 << " Switched: ";
+                    printSingleCar(switchedCar);
                     cout << endl;
                 }
             }
