@@ -6,11 +6,11 @@
 
 using namespace std;
 const int INITIAL_QUEUE_SIZE = 2;
-
+const int NUM_LANES = 4;
 const int TOTAL_TIME = 20;
 const int PAY_PROB = 46;
 const int JOIN_PROB = 39;
-const int SWITCH_PROB = 15;
+
 
 void printSingleCar(Car car)
 {
