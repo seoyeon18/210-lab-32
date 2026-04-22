@@ -7,6 +7,11 @@
 using namespace std;
 const int INITIAL_QUEUE_SIZE = 2;
 
+const int NUM_LANES = 4;
+const int TOTAL_TIME = 20;
+const int PAY_PROB = 46;
+const int JOIN_PROB = 39;
+const int SWITCH_PROB = 15;
 
 void printSingleCar(Car car) {
     cout << car.getYear()
@@ -29,12 +34,15 @@ void printQueue(deque<Car> lane) {
 int main() {
     srand(time(0));
 
-    deque<Car> lane;
+    const int NUM_LANES = 4;
+    deque<Car> plaza[NUM_LANES];
 
     // Milestone 1: create deque and populate with two Car objects
-    for (int i = 0; i < INITIAL_QUEUE_SIZE; i++) {
-        lane.push_back(Car());
+    for (int i = 0; i < NUM_LANES; i++) {
+        for (int j = 0; j < INITIAL_QUEUE_SIZE; j++) {
+            plaza[i].push_back(Car());
     }
+}
 
     cout << "Initial queue:\n";
     printQueue(lane);
