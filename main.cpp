@@ -7,51 +7,56 @@
 using namespace std;
 const int INITIAL_QUEUE_SIZE = 2;
 
-
 const int TOTAL_TIME = 20;
 const int PAY_PROB = 46;
 const int JOIN_PROB = 39;
 const int SWITCH_PROB = 15;
 
-void printSingleCar(Car car) {
+void printSingleCar(Car car)
+{
     cout << car.getYear()
-         << car.getMake() 
+         << car.getMake()
          << car.getTransponder();
 }
 
-void printQueue(deque<Car> lane) {
-    if (lane.empty()) {
+void printQueue(deque<Car> lane)
+{
+    if (lane.empty())
+    {
         cout << "Empty";
         return;
     }
 
-    for (Car car : lane) {
+    for (Car car : lane)
+    {
         car.print();
     }
 }
 
-
-int main() {
+int main()
+{
     srand(time(0));
 
     const int NUM_LANES = 4;
     deque<Car> plaza[NUM_LANES];
 
     // Milestone 1: create deque and populate with two Car objects
-    for (int i = 0; i < NUM_LANES; i++) {
-        for (int j = 0; j < INITIAL_QUEUE_SIZE; j++) {
+    for (int i = 0; i < NUM_LANES; i++)
+    {
+        for (int j = 0; j < INITIAL_QUEUE_SIZE; j++)
+        {
             plaza[i].push_back(Car());
+        }
     }
-}
 
     cout << "Initial queue:\n";
-    for (int i = 0; i < NUM_LANES; i++) {
+    for (int i = 0; i < NUM_LANES; i++)
+    {
         cout << "Lane " << i + 1 << ":\n";
         printQueue(plaza[i]);
     }
     cout << endl;
 
-    
     // int timePeriod = 0;
     // Milestone 2: loop until deque is empty
     // while (!lane.empty()) {
@@ -91,21 +96,56 @@ int main() {
     // cout << "This simulation ran " << timePeriod
     //      << " cycles until the queue was empty.\n";
 
+    for (int timePeriod = 1; timePeriod <= TOTAL_TIME; timePeriod++)
+    {
+        cout << "Time: " << timePeriod << endl;
 
+        for (int i = 0; i < NUM_LANES; i++)
+        {
+            if (plaza[i].empty())
+            {
+                int emptyChance = rand() % 2;
 
-    for (int timePeriod = 1; timePeriod <= TOTAL_TIME; timePeriod++) {
-    cout << "Time: " << timePeriod << endl;
+                if (emptyChance == 0)
+                {
+                    Car newCar;
+                    plaza[i].push_back(newCar);
+                    cout << "Lane: " << i + 1 << " Joined: ";
+                    printSingleCar(newCar);
+                    cout << endl;
+                }
+            }
+            else
+            {
+                int chance = rand() % 2;
 
-    for (int i = 0; i < NUM_LANES; i++) {
+                if (chance == 0)
+                {
+                    Car paidCar = plaza[i].front();
+                    plaza[i].pop_front();
+                    cout << "Lane: " << i + 1 << " Paid: ";
+                    printSingleCar(paidCar);
+                    cout << endl;
+                }
+                else
+                {
+                    Car newCar;
+                    plaza[i].push_back(newCar);
+                    cout << "Lane: " << i + 1 << " Joined: ";
+                    printSingleCar(newCar);
+                    cout << endl;
+                }
+            }
+        }
+
+        for (int i = 0; i < NUM_LANES; i++)
+        {
+            cout << "Lane " << i + 1 << " Queue:\n";
+            printQueue(plaza[i]);
+        }
+
+        cout << endl;
     }
-
-    for (int i = 0; i < NUM_LANES; i++) {
-        cout << "Lane " << i + 1 << " Queue:\n";
-        printQueue(plaza[i]);
-    }
-
-    cout << endl;
-}
 
     return 0;
 }
