@@ -14,16 +14,16 @@ const int SWITCH_PROB = 15;
 
 void printSingleCar(Car car)
 {
-    cout << car.getYear()
-         << car.getMake()
-         << car.getTransponder();
+    cout << "[" << car.getYear()<< " "
+         << car.getMake()<< " "
+         << car.getTransponder()<< ")]";
 }
 
 void printQueue(deque<Car> lane)
 {
     if (lane.empty())
     {
-        cout << "Empty";
+        cout << "   Empty\n";
         return;
     }
 
@@ -37,7 +37,6 @@ int main()
 {
     srand(time(0));
 
-    const int NUM_LANES = 4;
     deque<Car> plaza[NUM_LANES];
 
     // Milestone 1: create deque and populate with two Car objects
@@ -163,6 +162,8 @@ int main()
 
         cout << endl;
     }
+
+    cout << "This simulation ran " << TOTAL_TIME << " cycles.\n"; 
 
     return 0;
 }
