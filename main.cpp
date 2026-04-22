@@ -7,7 +7,7 @@
 using namespace std;
 const int INITIAL_QUEUE_SIZE = 2;
 
-const int NUM_LANES = 4;
+
 const int TOTAL_TIME = 20;
 const int PAY_PROB = 46;
 const int JOIN_PROB = 39;
@@ -54,43 +54,58 @@ int main() {
     
     // int timePeriod = 0;
     // Milestone 2: loop until deque is empty
-    while (!lane.empty()) {
-        timePeriod++;
+    // while (!lane.empty()) {
+    //     timePeriod++;
 
-        int chance = rand() % 100;  // 0~99
+    //     int chance = rand() % 100;  // 0~99
 
-        cout << "Time: " << timePeriod << " Operation: ";
+    //     cout << "Time: " << timePeriod << " Operation: ";
 
-        if (chance < 55) {
-            // 55% probability: front car pays and leaves
-           Car paidCar = lane.front();
-            lane.pop_front();
+    //     if (chance < 55) {
+    //         // 55% probability: front car pays and leaves
+    //        Car paidCar = lane.front();
+    //         lane.pop_front();
 
-            cout << "Car paid: ";
-            printSingleCar(paidCar);
-            cout << endl;
-        } else {
-            // 45% probability: another car joins
-           Car newCar;
-            lane.push_back(newCar);
+    //         cout << "Car paid: ";
+    //         printSingleCar(paidCar);
+    //         cout << endl;
+    //     } else {
+    //         // 45% probability: another car joins
+    //        Car newCar;
+    //         lane.push_back(newCar);
 
-            cout << "Joined lane: ";
-            printSingleCar(newCar);
-            cout << endl;
-        }
+    //         cout << "Joined lane: ";
+    //         printSingleCar(newCar);
+    //         cout << endl;
+    //     }
 
-    cout << "Queue:\n";
-        if (lane.empty()) {
-            cout << "    Empty\n";
-        } else {
-            printQueue(lane);
-        }
-        cout << endl;
+    // cout << "Queue:\n";
+    //     if (lane.empty()) {
+    //         cout << "    Empty\n";
+    //     } else {
+    //         printQueue(lane);
+    //     }
+    //     cout << endl;
+    // }
+
+    // cout << "This simulation ran " << timePeriod
+    //      << " cycles until the queue was empty.\n";
+
+
+
+    for (int timePeriod = 1; timePeriod <= TOTAL_TIME; timePeriod++) {
+    cout << "Time: " << timePeriod << endl;
+
+    for (int i = 0; i < NUM_LANES; i++) {
     }
 
-    cout << "This simulation ran " << timePeriod
-         << " cycles until the queue was empty.\n";
+    for (int i = 0; i < NUM_LANES; i++) {
+        cout << "Lane " << i + 1 << " Queue:\n";
+        printQueue(plaza[i]);
+    }
 
+    cout << endl;
+}
 
     return 0;
 }
