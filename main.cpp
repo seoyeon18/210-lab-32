@@ -45,11 +45,14 @@ int main() {
 }
 
     cout << "Initial queue:\n";
-    printQueue(lane);
+    for (int i = 0; i < NUM_LANES; i++) {
+        cout << "Lane " << i + 1 << ":\n";
+        printQueue(plaza[i]);
+    }
     cout << endl;
 
     
-    int timePeriod = 0;
+    // int timePeriod = 0;
     // Milestone 2: loop until deque is empty
     while (!lane.empty()) {
         timePeriod++;
